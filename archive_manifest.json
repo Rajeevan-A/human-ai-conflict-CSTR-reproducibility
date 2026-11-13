@@ -1,0 +1,38 @@
+{
+  "note": "SHA-256 hashes verified against four originally uploaded archives; GitHub Release asset filenames have number prefixes but bytes are identical. No third-party distribution rights implied.",
+  "repository": "https://github.com/Rajeevan-A/human-ai-conflict-CSTR-reproducibility",
+  "archives": {
+    "aste": {
+      "release_filename": "1.ASTE_Long_Context_Feasible.zip",
+      "original_upload_name": "ASTE_Long_Context_Feasible(1).zip",
+      "root": "ASTE_Long_Context_Feasible",
+      "sha256": "66b9d5b5efe98147e438bc348da12bbaaab57945d0cb6f48e46aab96e5b6e0e0",
+      "size_bytes": 753208,
+      "files": 52
+    },
+    "human": {
+      "release_filename": "2.Human_Operator_ABC.zip",
+      "original_upload_name": "Human_Operator_ABC(2).zip",
+      "root": "Human_Operator_ABC",
+      "sha256": "269ece5a85ca50fcba711507b705f94a5ffa245fdbb48a58dba5cb2256d2dfdb",
+      "size_bytes": 17495196,
+      "files": 29
+    },
+    "ai": {
+      "release_filename": "3.AI_Operator_ABC.zip",
+      "original_upload_name": "AI_Operator_ABC(2).zip",
+      "root": "AI_Operator_ABC",
+      "sha256": "7fea3a98b8298512d9e6b0589511ea8a7d4479a128ef83512eddcda6917ad97e",
+      "size_bytes": 56803237,
+      "files": 28
+    },
+    "conflict": {
+      "release_filename": "4.HA_Conflict_Paper_Complete.zip",
+      "original_upload_name": "HA_Conflict_Paper_Complete(6).zip",
+      "root": "HA_Conflict_Paper_Complete",
+      "sha256": "db9c87460ab229c3fa8d634a278a1621615b02cb87d7cb208d1ad5c06c3dd2ae",
+      "size_bytes": 135202373,
+      "files": 206
+    }
+  }
+}

@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.venv/
+# Extracted research packages, which are obtained from Releases and must not be accidentally browser-uploaded
+ASTE_Long_Context_Feasible/
+Human_Operator_ABC/
+AI_Operator_ABC/
+HA_Conflict_Paper_Complete/
+*.zip
