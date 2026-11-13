@@ -1,9 +1,72 @@
 # Human–AI Conflict in Intelligent Processing Systems — ASTE–CSTR Reproducibility
 
-**Research materials for _Human–Artificial Intelligence Conflict in Intelligent Processing Systems: A Modeling Perspective_.**  
-**Reference platform:** the Autonomous Systems Training Environment (ASTE) CSTR described by Markaj, Mercangöz & Fay (2024), *Computers & Chemical Engineering* **189**, 108798, https://doi.org/10.1016/j.compchemeng.2024.108798.
+**Companion research software and archived data for _Human–Artificial Intelligence Conflict in Intelligent Processing Systems: A Modeling Perspective_.**  
+**Original process-simulation reference:** Markaj, Mercangöz & Fay (2024), *Computers & Chemical Engineering*, 189, 108798. [https://doi.org/10.1016/j.compchemeng.2024.108798](https://doi.org/10.1016/j.compchemeng.2024.108798).
 
-> **Status: draft research release, not yet a public, independently validated software release.** The four complete source archives are attached to a **GitHub Release**, **not** the Code tab. A draft release is only available to the owner/collaborators with access. Consult the [publication checklist](RELEASE_CHECKLIST.md) before publishing; ASTE source/binary redistribution rights must be resolved.
+> **Research release status:** The four model archives are attached to a GitHub **Draft Release**. They are **not missing**: release attachments do not appear as source files in the repository's **Code** tab. Draft assets are not accessible to general readers. Do not publish them until ASTE source/binary redistribution rights and coauthor permissions have been checked.
+
+## START HERE — download all four research models
+
+**[OPEN THE FOUR MODEL ARCHIVES IN RELEASES](https://github.com/Rajeevan-A/human-ai-conflict-CSTR-reproducibility/releases)**  
+Repository owner: open the [current Draft Release](https://github.com/Rajeevan-A/human-ai-conflict-CSTR-reproducibility/releases/tag/untagged-e67c10659ea266dcf9e9), then open **Assets**. When this release is eventually published, its tag/URL may change; the stable **Releases** link above remains the reader entry point.
+
+| Release asset — download each ZIP | Contents | Needed for |
+|---|---|---|
+| `1.ASTE_Long_Context_Feasible.zip` (736 KB) | Adapted ASTE CSTR MATLAB/Simulink `.slx`, MATLAB `.m`, fault schedules, MATLAB-driving Python scripts | **Fresh physical reactor simulation** |
+| `2.Human_Operator_ABC.zip` (16.7 MB) | Simulated human diagnostic surrogate, A/B/C data and saved outputs | Human diagnostic analysis |
+| `3.AI_Operator_ABC.zip` (54.2 MB) | Random Forest fault classifier, saved predictions/model, A/B/C data | AI diagnostic analysis |
+| `4.HA_Conflict_Paper_Complete.zip` (129 MB) | Context-specific Bayesian conflict model, diagnostic review, risk, verification, figures and tables | **Reproduce paper results** |
+
+**Do not use `Code → Download ZIP` to obtain these four archives.** That command only downloads files committed in the Code tab, not uploaded Release assets. To inspect their contents, download each asset and extract it locally. Full instructions: [download and extraction](docs/DOWNLOAD_ALL_FOUR_MODELS.md).
+
+## Which software do you need?
+
+| Goal | MATLAB required? | Required tools |
+|---|---|---|
+| Inspect saved figures, tables, and numerical audit | **No** | Python 3 (archive inspection uses Python standard library) |
+| Recompute conflict, review and risk from saved human/AI outputs | **No** | Python 3 and package dependencies |
+| Recompute human surrogate and Random Forest predictions | **No** | Python 3, NumPy, pandas, scikit-learn and package dependencies |
+| **Regenerate the ASTE–CSTR reactor trajectory** | **Yes** | **MATLAB, Simulink, MATLAB Engine API for Python**, model-required toolboxes and Windows-compatible compiled component where used |
+
+The ASTE launcher identifies **MATLAB R2023b + Simulink** as its intended environment. For R2023b, use compatible **64-bit Python 3.9–3.11** and a matching MATLAB Engine API, e.g. `python -m pip install matlabengine==23.2.3` (not an unversioned latest Engine package). Verify all MATLAB licenses and toolbox/model dependencies locally. **A successful full ASTE simulation is not established merely by downloading the archives.** See **[complete MATLAB setup and ASTE execution guide](docs/MATLAB_ASTE_SETUP.md)**.
+
+## Run the archived results without MATLAB (quick start)
+
+Place the four downloaded ZIPs alongside the repository's `scripts/` and `archive_manifest.json`. In that directory:
+
+```bash
+python scripts/prepare_archives.py --verify
+python scripts/inspect_archive_reports.py
+python scripts/summarize_archived_results.py
+python scripts/prepare_archives.py --extract
+```
+
+The first three commands **inspect the existing saved outputs**; they do not recompute reactor or conflict results. To recompute the archived conflict model after extraction and dependency installation:
+
+```bash
+python -m pip install -r HA_Conflict_Paper_Complete/requirements.txt
+python -m pip install -r Human_Operator_ABC/requirements.txt
+python -m pip install -r AI_Operator_ABC/requirements.txt
+python HA_Conflict_Paper_Complete/test_bayesian_audit.py
+python HA_Conflict_Paper_Complete/run_package.py
+```
+
+**Important provenance:** the archived publication outputs use `external` human and AI prediction files from the separate ZIPs; the bundled reference AI stream in ZIP 4 is different. `run_package.py` rewrites outputs; preserve an untouched copy. See [full reproduction instructions](docs/REPRODUCE.md).
+
+## Regenerate physical ASTE–CSTR data with MATLAB/Simulink
+
+Once the ASTE archive is extracted and MATLAB Engine works from Python, the intended fresh-run order on a compatible Windows setup is:
+
+```bash
+python ASTE_Long_Context_Feasible/run_input_check.py
+python ASTE_Long_Context_Feasible/run_duration_screen.py
+python ASTE_Long_Context_Feasible/run_long_sequences.py
+python ASTE_Long_Context_Feasible/plot_reactor_results.py
+```
+
+The launcher uses a Windows runtime path `D:/ASTE_LONG/` by default, which may need reconfiguration if that drive is absent. Each 70,000-second A/B/C trajectory is **simulated afresh in MATLAB**, not read back from a saved CSV. The full guide documents the prerequisites, runtime paths, screens and generated CSVs: **[MATLAB ASTE setup](docs/MATLAB_ASTE_SETUP.md)**.
+
+---
 
 ## Research objective
 
@@ -12,58 +75,6 @@ To examine how **issue-qualified repeated human–AI diagnostic interactions** a
 ## What is new relative to the ASTE reference framework?
 
 The original ASTE provides a modular MATLAB/Simulink process and supervisory/safety simulation environment. The supplied research adaptation retains its CSTR plant/regulatory-control basis while configuring a **70,000-second, deterministic scheduled-fault, offline diagnostic study** in three distinct runs A/B/C. The project then adds **a separate stochastic finite-state human diagnostic surrogate**, **a Random Forest fault classifier**, **an issue-specific A/U/R interaction ledger**, **a context-specific Bayesian low/high conflict estimator with persistence/recurrence**, **two evidence-review policies**, and **a conditional consequence-risk index**. These diagnostic components are additional research modules, **not new ASTE plant physics**. No human/AI review action is sent back to actuate the reactor. Read [exact differences and qualifications](docs/ASTE_ADAPTATIONS.md).
-
-## Access the four original study archives
-
-Navigate to **[Releases](https://github.com/Rajeevan-A/human-ai-conflict-CSTR-reproducibility/releases)** and open **Human–AI Conflict ASTE–CSTR Research Model**. Under **Assets**, download *all four* archives. They are not visible as individual source files under **Code**.
-
-| Release asset filename | Approx. size | Contents |
-|---|---:|---|
-| `1.ASTE_Long_Context_Feasible.zip` | 736 KB | ASTE MATLAB/Simulink source, CSTR fault schedules and experiment scripts |
-| `2.Human_Operator_ABC.zip` | 16.7 MB | Human diagnostic surrogate, A/B/C reactor input CSVs, saved predictions and evaluations |
-| `3.AI_Operator_ABC.zip` | 54.2 MB | Random Forest training/evaluation scripts, saved classifier, A/B/C predictions |
-| `4.HA_Conflict_Paper_Complete.zip` | 129 MB | Conflict-model source, inputs/outputs, review policies, risk, audit, tables and figures |
-
-**The four release assets are renamed copies of the original uploads. Their SHA-256 identities are unchanged** and are listed in [`archive_manifest.json`](archive_manifest.json). **Do not rename any content inside the ZIPs.** The archive-check script accepts both numbered release filenames and original upload names.
-
-### Quick start — read saved results (no MATLAB, no Git required)
-
-1. Download all four assets under **Releases → Assets** and put them in the **same folder** as this README, `scripts/`, `docs/`, and `archive_manifest.json`. Do not place the documentation ZIP itself in the folder; **extract the documentation first**.
-2. Install Python 3.9 or another Python 3 version compatible with the dependencies used in the source code. For the following **archive inspection** you only need Python's standard library.
-3. From that folder run:
-
-```bash
-python scripts/prepare_archives.py --verify
-python scripts/inspect_archive_reports.py
-python scripts/summarize_archived_results.py
-```
-
-4. To extract all four archives as sibling source-code directories:
-
-```bash
-python scripts/prepare_archives.py --extract
-```
-
-**No Git CLI is required for readers downloading release assets.** Draft releases are inaccessible to ordinary public readers; these steps apply to the owner now and to readers **after a release is published and accessible**.
-
-### Reproduce the archived external-input model and figures
-
-The *saved* conflict model's `results/run_manifest.json` says `source_mode: external` for A/B/C. Their AI/human SHA-256 hashes **match the separate standalone AI and human ZIPs**. This is the provenance of the saved figures, tables and audit, and is the recommended way to attempt reproduction from the original supplied files:
-
-```bash
-python -m venv .venv
-# Windows PowerShell: .venv\Scripts\Activate.ps1 ; Windows cmd: .venv\Scripts\activate.bat
-# macOS/Linux: source .venv/bin/activate
-python -m pip install -r HA_Conflict_Paper_Complete/requirements.txt
-python -m pip install -r Human_Operator_ABC/requirements.txt
-python -m pip install -r AI_Operator_ABC/requirements.txt
-python HA_Conflict_Paper_Complete/test_bayesian_audit.py
-python HA_Conflict_Paper_Complete/run_package.py
-```
-
-`run_package.py` uses the **standalone human/AI outputs** in their sibling directories and runs structural checks, figures/tables, sensitivity tests and the independent Bayesian numerical audit. **It overwrites generated outputs**, so make a fresh working copy first. Confirm `results/run_manifest.json` identifies every run as `external` and matches source hashes.
-
-**Alternative, separate experiment:** `python HA_Conflict_Paper_Complete/run_bundled_reference.py` uses the included *different* reference AI predictions and produces potentially different outputs. **Do not mix those results with the saved external-input results or cite the two modes as identical.** Full MATLAB/Simulink recreation is an additional, system-specific workflow; see [reproduction instructions](docs/REPRODUCE.md).
 
 ## Where readers find the results
 
@@ -81,6 +92,8 @@ See [results interpretation and lemma-evidence map](docs/RESULTS_AND_LEMMAS.md).
 
 | Guide | Reader question |
 |---|---|
+| [Download four research models](docs/DOWNLOAD_ALL_FOUR_MODELS.md) | Which ZIP to download, why Code does not display it, and how to extract it |
+| [MATLAB/Simulink ASTE execution](docs/MATLAB_ASTE_SETUP.md) | Full MATLAB requirements, input checks, screens and fresh A/B/C reactor simulations |
 | [Complete reader manual](docs/COMPLETE_READER_MANUAL.md) | What is the research, how does the pipeline work, what do the tests mean? |
 | [Changes from the original ASTE](docs/ASTE_ADAPTATIONS.md) | What was inherited, reconfigured, disabled, and added? |
 | [Reproduction and execution](docs/REPRODUCE.md) | How do I download, verify, extract, run and identify outputs? |
