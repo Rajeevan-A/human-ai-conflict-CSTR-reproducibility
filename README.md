@@ -8,7 +8,7 @@
 ## START HERE — download all four research models
 
 **[OPEN THE FOUR MODEL ARCHIVES IN RELEASES](https://github.com/Rajeevan-A/human-ai-conflict-CSTR-reproducibility/releases)**  
-Repository owner: open the [current Draft Release](https://github.com/Rajeevan-A/human-ai-conflict-CSTR-reproducibility/releases/tag/untagged-e67c10659ea266dcf9e9), then open **Assets**. When this release is eventually published, its tag/URL may change; the stable **Releases** link above remains the reader entry point.
+Repository owner: open the [Published Release v1.0.0](https://github.com/Rajeevan-A/human-ai-conflict-CSTR-reproducibility/releases/tag/untagged-e67c10659ea266dcf9e9), then open **Assets**. When this release is eventually published, its tag/URL may change; the stable **Releases** link above remains the reader entry point.
 
 | Release asset — download each ZIP | Contents | Needed for |
 |---|---|---|
