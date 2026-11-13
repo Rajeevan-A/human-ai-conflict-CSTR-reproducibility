@@ -3,7 +3,7 @@
 **Companion research software and archived data for _Human–Artificial Intelligence Conflict in Intelligent Processing Systems: A Modeling Perspective_.**  
 **Original process-simulation reference:** Markaj, Mercangöz & Fay (2024), *Computers & Chemical Engineering*, 189, 108798. [https://doi.org/10.1016/j.compchemeng.2024.108798](https://doi.org/10.1016/j.compchemeng.2024.108798).
 
-> **Research release status:** The four model archives are attached to a GitHub **Draft Release**. They are **not missing**: release attachments do not appear as source files in the repository's **Code** tab. Draft assets are not accessible to general readers. Do not publish them until ASTE source/binary redistribution rights and coauthor permissions have been checked.
+> **Research release status: **Version v1.0.0** is publicly available. The four research model archives can be downloaded from GitHub Release v1.0.0. Release attachments are separate from the repository's Code tab..
 
 ## START HERE — download all four research models
 
