@@ -1,61 +1,94 @@
 # Human–AI Conflict in Intelligent Processing Systems — ASTE–CSTR Reproducibility
 
-**Companion research software and archived data for _Human–Artificial Intelligence Conflict in Intelligent Processing Systems: A Modeling Perspective_.**  
-**Original process-simulation reference:** Markaj, Mercangöz & Fay (2024), *Computers & Chemical Engineering*, 189, 108798. [https://doi.org/10.1016/j.compchemeng.2024.108798](https://doi.org/10.1016/j.compchemeng.2024.108798).
+Research code, fixed simulation inputs, numerical verification, and figures supporting the manuscript *Human–Artificial Intelligence Conflict in Intelligent Processing Systems: A Modeling Perspective*.
 
-> **Research release status (Version v1.0.0)** is publicly available. The four research model archives can be downloaded from GitHub Release v1.0.0. Release attachments are separate from the repository's Code tab..
+The proposed framework uses **seven postulates and six lemmas** to represent human–AI conflict as a **context-specific, history-dependent process** and relate estimated conflict probability to conditional process risk. It is evaluated using an adapted Autonomous Systems Training Environment (ASTE) continuous stirred-tank reactor (CSTR) simulation.
 
-## START HERE — download all four research models
+**Upstream process-model reference:** Markaj, A., Mercangöz, M., & Fay, A. (2024). *Design and implementation of an Autonomous Systems Training Environment framework for control algorithm evaluation in autonomous plant operation*. *Computers & Chemical Engineering, 189*, 108798. https://doi.org/10.1016/j.compchemeng.2024.108798
 
-**[OPEN THE FOUR MODEL ARCHIVES IN RELEASES](https://github.com/Rajeevan-A/human-ai-conflict-CSTR-reproducibility/releases)**  
-Repository owner: open the [Published Release v1.0.0](https://github.com/Rajeevan-A/human-ai-conflict-CSTR-reproducibility/releases/tag/v1.0.0), then open **Assets**. When this release is eventually published, its tag/URL may change; the stable **Releases** link above remains the reader entry point.
+## Download the research packages
 
-| Release asset — download each ZIP | Contents | Needed for |
+**[GitHub Releases](https://github.com/Rajeevan-A/human-ai-conflict-CSTR-reproducibility/releases)** · **[Currently published release: v1.0.0](https://github.com/Rajeevan-A/human-ai-conflict-CSTR-reproducibility/releases/tag/v1.0.0)**
+
+The published release currently contains these four assets. Download the fourth archive for the **revised human–AI conflict model and current manuscript figures**.
+
+| Release asset | Contents | Purpose |
 |---|---|---|
-| `1.ASTE_Long_Context_Feasible.zip` (736 KB) | Adapted ASTE CSTR MATLAB/Simulink `.slx`, MATLAB `.m`, fault schedules, MATLAB-driving Python scripts | **Fresh physical reactor simulation** |
-| `2.Human_Operator_ABC.zip` (16.7 MB) | Simulated human diagnostic surrogate, A/B/C data and saved outputs | Human diagnostic analysis |
-| `3.AI_Operator_ABC.zip` (54.2 MB) | Random Forest fault classifier, saved predictions/model, A/B/C data | AI diagnostic analysis |
-| `4.HA_Conflict_Paper_Complete.zip` (129 MB) | Context-specific Bayesian conflict model, diagnostic review, risk, verification, figures and tables | **Reproduce paper results** |
+| [`1.ASTE_Long_Context_Feasible.zip`](https://github.com/Rajeevan-A/human-ai-conflict-CSTR-reproducibility/releases/download/v1.0.0/1.ASTE_Long_Context_Feasible.zip) | Adapted ASTE–CSTR MATLAB/Simulink model and simulation scripts | Regenerate the process trajectories, subject to MATLAB dependencies |
+| [`2.Human_Operator_ABC.zip`](https://github.com/Rajeevan-A/human-ai-conflict-CSTR-reproducibility/releases/download/v1.0.0/2.Human_Operator_ABC.zip) | Simulated human diagnostic model and Runs A–C outputs | Upstream human diagnostic analysis |
+| [`3.AI_Operator_ABC.zip`](https://github.com/Rajeevan-A/human-ai-conflict-CSTR-reproducibility/releases/download/v1.0.0/3.AI_Operator_ABC.zip) | AI fault classifier and Runs A–C outputs | Upstream AI diagnostic analysis |
+| [`4.HA_Conflict_Model_and_All_Plots.zip`](https://github.com/Rajeevan-A/human-ai-conflict-CSTR-reproducibility/releases/download/v1.0.0/4.HA_Conflict_Model_and_All_Plots.zip) | **Revised** human–AI conflict model, fixed CSTR/human/AI input files, A–C results, numerical checks, final figures and plotting scripts | **Reproduce the current human–AI conflict analysis** |
 
-**Do not use `Code → Download ZIP` to obtain these four archives.** That command only downloads files committed in the Code tab, not uploaded Release assets. To inspect their contents, download each asset and extract it locally. Full instructions: [download and extraction](docs/DOWNLOAD_ALL_FOUR_MODELS.md).
+The updated fourth archive is approximately **183 MiB** (191,688,058 bytes), SHA-256:
 
-## Which software do you need?
-
-| Goal | MATLAB required? | Required tools |
-|---|---|---|
-| Inspect saved figures, tables, and numerical audit | **No** | Python 3 (archive inspection uses Python standard library) |
-| Recompute conflict, review and risk from saved human/AI outputs | **No** | Python 3 and package dependencies |
-| Recompute human surrogate and Random Forest predictions | **No** | Python 3, NumPy, pandas, scikit-learn and package dependencies |
-| **Regenerate the ASTE–CSTR reactor trajectory** | **Yes** | **MATLAB, Simulink, MATLAB Engine API for Python**, model-required toolboxes and Windows-compatible compiled component where used |
-
-The ASTE launcher identifies **MATLAB R2023b + Simulink** as its intended environment. For R2023b, use compatible **64-bit Python 3.9–3.11** and a matching MATLAB Engine API, e.g. `python -m pip install matlabengine==23.2.3` (not an unversioned latest Engine package). Verify all MATLAB licenses and toolbox/model dependencies locally. **A successful full ASTE simulation is not established merely by downloading the archives.** See **[complete MATLAB setup and ASTE execution guide](docs/MATLAB_ASTE_SETUP.md)**.
-
-## Run the archived results without MATLAB (quick start)
-
-Place the four downloaded ZIPs alongside the repository's `scripts/` and `archive_manifest.json`. In that directory:
-
-```bash
-python scripts/prepare_archives.py --verify
-python scripts/inspect_archive_reports.py
-python scripts/summarize_archived_results.py
-python scripts/prepare_archives.py --extract
+```text
+76e366088601edfa275bf4724300e062f2e8b6937694ac00a2c4378f0e03a40b
 ```
 
-The first three commands **inspect the existing saved outputs**; they do not recompute reactor or conflict results. To recompute the archived conflict model after extraction and dependency installation:
+**Version note:** The fourth archive currently hosted under the `v1.0.0` tag has been replaced with the updated model package. For a stable journal record, a **new, unchanged, versioned release** should be published and cited before final submission. The original release tag alone does not distinguish the archive versions. The repository's `archive_manifest.json` and `ARCHIVE_CHECKSUMS.sha256` must match the current assets.
+
+Release ZIP assets are **not included** when selecting **Code → Download ZIP** on GitHub. Download them from the release's **Assets** section.
+
+## Research model
+
+The three algorithms implement the proposed framework:
+
+1. **Algorithm 1 — Human–AI interaction outcomes:** maintains agreement (`A`), unresolved disagreement (`U`), and evidence-supported resolution (`R`) for each operating context. It distinguishes continuing disagreement from recurring episodes and requires repeated qualified agreement for resolution.
+2. **Algorithm 2 — Conflict estimation:** updates a context-specific Bayesian posterior using retained unresolved duration (`D`), recurrence count (`M`), and interaction evidence, then computes a weighted system-level estimate.
+3. **Algorithm 3 — Conflict-related risk:** combines the modeled probability of higher conflict, process severity, and assumed conditional consequences to calculate context-specific and system-level risk indices.
+
+The ASTE–CSTR analysis uses **Run A** for diagnostic-model development/training, **Run B** for validation, and **Run C** for the manuscript's principal numerical tests. Each reactor simulation spans **70,000 seconds**; human–AI diagnostic comparisons are evaluated at **10-second intervals**. The model compares three review policies: **baseline**, **observation review**, and **PI evidence review**.
+
+Contexts comprise normal operation (`C0`) and three abnormal operating conditions (`C1`–`C3`), including cooling-related context `C3`. In this controlled simulation, the injected fault labels select the context for analysis; the labels are not fed into the human or AI classifiers. This context-selection mechanism is **not** a validated method for identifying operating contexts in a real plant.
+
+## Reproduce the updated human–AI analysis (without MATLAB)
+
+Archive 4 includes the fixed reactor observations and human/AI diagnostic data, so **MATLAB is not required** to rerun the human–AI conflict and conditional risk calculations.
+
+1. Download and extract `4.HA_Conflict_Model_and_All_Plots.zip`.
+2. Open a terminal in its `HA_Conflict_Updated/Model/` directory.
+3. Run:
 
 ```bash
-python -m pip install -r HA_Conflict_Paper_Complete/requirements.txt
-python -m pip install -r Human_Operator_ABC/requirements.txt
-python -m pip install -r AI_Operator_ABC/requirements.txt
-python HA_Conflict_Paper_Complete/test_bayesian_audit.py
-python HA_Conflict_Paper_Complete/run_package.py
+python -m pip install -r requirements.txt
+python test_bayesian_audit.py
+python run_package.py
 ```
 
-**Important provenance:** the archived publication outputs use `external` human and AI prediction files from the separate ZIPs; the bundled reference AI stream in ZIP 4 is different. `run_package.py` rewrites outputs; preserve an untouched copy. See [full reproduction instructions](docs/REPRODUCE.md).
+The main pipeline recomputes the **nine Run A/B/C × review-policy analyses**, numerical checks, and model-generated figures. It writes outputs into the model's `results/` and `paper/` folders. **Keep an untouched copy of the downloaded ZIP**, because rerunning may overwrite saved outputs.
 
-## Regenerate physical ASTE–CSTR data with MATLAB/Simulink
+For the detailed model configuration, input provenance, figure-generation scripts, and limitations, see the files inside the ZIP:
 
-Once the ASTE archive is extracted and MATLAB Engine works from Python, the intended fresh-run order on a compatible Windows setup is:
+- `HA_Conflict_Updated/START_HERE.md` — package map and current figure numbering.
+- `HA_Conflict_Updated/Model/START_HERE_REVISED.md` — revised implementation and execution instructions.
+- `HA_Conflict_Updated/Model/results/run_manifest.json` — source mode, input hashes, configuration, and environment details.
+- `HA_Conflict_Updated/Model/results/verification.json` — numerical verification.
+- `HA_Conflict_Updated/Model/config.json` — Bayesian, review, and risk assumptions.
+
+The `Model/paper/` figures generated by the code retain some **development-stage figure numbering**. The current journal layouts are stored separately in `Paper_Final/`, as listed below.
+
+## Figures supporting the current manuscript
+
+Inside `HA_Conflict_Updated/Paper_Final/`:
+
+| Manuscript figure | Exact file stem | Content |
+|---|---|---|
+| **Figure 2** | `Figure_2_Algorithm1_Interaction_Evidence` | Run C human–AI decisions, PI evidence and interaction outcomes |
+| **Figure 3** | `Figure_3_Algorithm2_History_and_Conflict` | Unresolved history, recurrence and conflict posterior during a C3 issue |
+| **Figure 4** | `Figure_4_Algorithm2_Context_and_System` | Context-specific and weighted system conflict estimates and their cumulative mean |
+| **Figure 5** | `Figure_5_Algorithm3_Cumulative_Risk_Context_Regions` | Context severity, cumulative system conflict estimate and conflict-related risk |
+| **Appendix Figure A1** | `appendix/Figure_A1_Algorithm1_RunC_Transition_Comparison` | Run C interaction transitions |
+| **Appendix Figure B1** | `appendix/Figure_B1_Algorithm1_RunC_Resolution_Timing` | Run C matched-issue resolution timing |
+
+Each listed figure is supplied in **PNG and PDF** formats. The `Paper_Final/data/` directory contains exported plotting data, and `Paper_Final/supplementary/` contains numerical and sensitivity figures. `Additional_Plot_Gallery/` and other historical folders include older figure layouts, **not the current manuscript numbering**.
+
+**Interpretation note:** The instantaneous system-level conflict probability is the weighted context estimate in Eq. (3.12). Curves labeled *cumulative* are **running time averages**, not the probability that at least one conflict will occur.
+
+## Regenerate the physical ASTE–CSTR trajectories (MATLAB required)
+
+The first archive contains the adapted MATLAB/Simulink process model. Fresh process simulation requires a compatible MATLAB/Simulink installation, required toolboxes and model components, and a working MATLAB Engine API for Python. Its launcher was developed for **MATLAB R2023b** on a compatible Windows environment, and its default `D:/ASTE_LONG/` path may need to be changed.
+
+The intended launcher sequence is:
 
 ```bash
 python ASTE_Long_Context_Feasible/run_input_check.py
@@ -64,55 +97,39 @@ python ASTE_Long_Context_Feasible/run_long_sequences.py
 python ASTE_Long_Context_Feasible/plot_reactor_results.py
 ```
 
-The launcher uses a Windows runtime path `D:/ASTE_LONG/` by default, which may need reconfiguration if that drive is absent. Each 70,000-second A/B/C trajectory is **simulated afresh in MATLAB**, not read back from a saved CSV. The full guide documents the prerequisites, runtime paths, screens and generated CSVs: **[MATLAB ASTE setup](docs/MATLAB_ASTE_SETUP.md)**.
+These commands require the corresponding extracted ASTE archive and system dependencies; they are **not needed** to analyze the fixed saved inputs from archive 4. See [MATLAB setup](MATLAB_ASTE_SETUP.md) and [ASTE modifications](ASTE_ADAPTATIONS.md).
 
----
+## Scientific scope and limitations
 
-## Research objective
+This release supports **simulation-based evaluation and numerical verification**, not empirical validation of human conflict probabilities or measured accident-risk reduction.
 
-To examine how **issue-qualified repeated human–AI diagnostic interactions** affect context-specific estimated conflict states and downstream **conditional, scenario-based risk indices**. The study builds on the ASTE–CSTR process simulation but does **not** claim empirical human-operator validation, intervention on the physical process, or measured accident-risk reduction.
+- Human diagnostic decisions are generated by a **simulated operator model**; the AI classifier is fixed. The revised HA analysis does not retrain the upstream models.
+- Operating contexts are assigned using **injected simulator labels** rather than an independently deployed context detector.
+- The C3 PI review and the diagnostic verification mechanism use **related controller-response evidence**; independent verification remains future work.
+- Diagnostic review changes subsequent interpretation and interaction outcomes, **not reactor control actions**. The reported risk index uses **specified conditional-consequence assumptions** and 400 illustrative scenarios, not observed accidents.
+- The six lemmas are assessed through mathematical conditions and numerical implementation checks. These checks do **not** establish empirical validity of all postulated relationships. The revised HA model was developed after examination of simulation results; Run C is not an untouched prospective validation of the final HA assumptions.
 
-## What is new relative to the ASTE reference framework?
+Reproducibility requires preserving the exact input versions, parameter files, results, release assets, and checksums. Avoid combining earlier archived conflict-model outputs with the revised model's figures or numerical claims.
 
-The original ASTE provides a modular MATLAB/Simulink process and supervisory/safety simulation environment. The supplied research adaptation retains its CSTR plant/regulatory-control basis while configuring a **70,000-second, deterministic scheduled-fault, offline diagnostic study** in three distinct runs A/B/C. The project then adds **a separate stochastic finite-state human diagnostic surrogate**, **a Random Forest fault classifier**, **an issue-specific A/U/R interaction ledger**, **a context-specific Bayesian low/high conflict estimator with persistence/recurrence**, **two evidence-review policies**, and **a conditional consequence-risk index**. These diagnostic components are additional research modules, **not new ASTE plant physics**. No human/AI review action is sent back to actuate the reactor. Read [exact differences and qualifications](docs/ASTE_ADAPTATIONS.md).
+## Documentation and provenance
 
-## Where readers find the results
+The repository contains supporting guides, some of which describe the **earlier** archive layout. For the revised model, the instructions **inside archive 4 take precedence**.
 
-Once `4.HA_Conflict_Paper_Complete.zip` is extracted:
+- [Download instructions](DOWNLOAD_ALL_FOUR_MODELS.md)
+- [ASTE adaptations](ASTE_ADAPTATIONS.md)
+- [MATLAB/Simulink setup](MATLAB_ASTE_SETUP.md)
+- [Testing protocol](TESTING_PROTOCOL.md)
+- [Reproduction guide](REPRODUCE.md)
+- [Results and lemmas](RESULTS_AND_LEMMAS.md)
+- [Third-party software and data provenance](THIRD_PARTY_AND_PROVENANCE.md)
+- [Citation template](CITATION_TEMPLATE.md)
 
-- `HA_Conflict_Paper_Complete/paper/figures/` — main figures 01–07 (PNG and PDF) and figure data.
-- `HA_Conflict_Paper_Complete/paper/supplementary_figures/` — sensitivity and supporting plots.
-- `HA_Conflict_Paper_Complete/paper/tables/` — comparison data, C3 common-cohort recovery, risk summary.
-- `HA_Conflict_Paper_Complete/paper/verification_results/` — Bayesian numerical audit evidence.
-- `HA_Conflict_Paper_Complete/results/run_manifest.json` — **source mode and SHA-256 provenance**.
+**Third-party rights:** Attribution to the ASTE authors does not by itself establish permission to redistribute upstream MATLAB/Simulink files or compiled components. Confirm licensing and permission for all distributed third-party assets before journal publication.
 
-See [results interpretation and lemma-evidence map](docs/RESULTS_AND_LEMMAS.md). Figure filenames are **development identifiers**; renumber to match the manuscript, not blindly as Fig01–07.
+## Citation and code availability
 
-## Documentation index
+For a manuscript code/data availability statement:
 
-| Guide | Reader question |
-|---|---|
-| [Download four research models](docs/DOWNLOAD_ALL_FOUR_MODELS.md) | Which ZIP to download, why Code does not display it, and how to extract it |
-| [MATLAB/Simulink ASTE execution](docs/MATLAB_ASTE_SETUP.md) | Full MATLAB requirements, input checks, screens and fresh A/B/C reactor simulations |
-| [Complete reader manual](docs/COMPLETE_READER_MANUAL.md) | What is the research, how does the pipeline work, what do the tests mean? |
-| [Changes from the original ASTE](docs/ASTE_ADAPTATIONS.md) | What was inherited, reconfigured, disabled, and added? |
-| [Reproduction and execution](docs/REPRODUCE.md) | How do I download, verify, extract, run and identify outputs? |
-| [Testing protocol](docs/TESTING_PROTOCOL.md) | How are the six lemmas and numerical implementation checked? |
-| [Results and lemmas](docs/RESULTS_AND_LEMMAS.md) | What can and cannot be concluded from figures and numerical values? |
-| [Third-party source and provenance](docs/THIRD_PARTY_AND_PROVENANCE.md) | What can be redistributed? Which results come from which AI input? |
-| [Publication next steps](docs/NEXT_STEPS_TO_PUBLICATION.md) | How to inspect the private draft, publish and cite a release? |
-| [GitHub and publication guide](docs/GITHUB_AND_PUBLICATION.md) | Where does GitHub store source versus release attachments? |
+> The Python implementation of the proposed human–AI conflict framework, fixed ASTE–CSTR simulation inputs, numerical verification results, and supporting figures are available at https://github.com/Rajeevan-A/human-ai-conflict-CSTR-reproducibility.
 
-## Scientific boundaries and reproducibility limitations
-
-- Three **separately initialized** 70,000-second simulated sequences: **A** development/AI training, **B** validation, **C** designated retrospective test. They share a simulator and do not constitute independent plant trials.
-- Each policy uses the **same reactor trajectory and fixed AI predictions** within a run. Review changes subsequent **simulated human interpretation**, **not reactor control**.
-- The latent probability of higher conflict is a **model posterior under assigned transitions and likelihoods**, not an empirically calibrated frequency of conflict.
-- Conditional risk assumes **400 hypothetical consequence scenarios**, seed 10601 and an equal-exposure mixture of C1/C2/C3. Risk bands describe *assumption scenarios*, not confidence intervals and not measured accident risk.
-- No recorded human participants, industrial incident outcomes or prospective plant deployment are included. See the documentation before reporting effect size or statistical significance.
-
-## Citation and attribution
-
-**Original reference:** Markaj, A., Mercangöz, M., & Fay, A. (2024). Design and implementation of an Autonomous Systems Training Environment framework for control algorithm evaluation in autonomous plant operation. *Computers & Chemical Engineering, 189*, 108798. https://doi.org/10.1016/j.compchemeng.2024.108798
-
-**This repository:** cite the actual versioned GitHub release and Zenodo DOI *after those exist*. The current release is a draft and has no confirmed final DOI; see [citation template](CITATION_TEMPLATE.md). A published article's open-access license does **not automatically license all associated MATLAB files/binaries**. Check upstream and author permissions before publishing those assets.
+When finalizing the journal article, cite the **specific frozen release/version** used to generate its results (and an archival DOI, if one has actually been issued), rather than citing an unspecified version. Cite the Markaj, Mercangöz & Fay (2024) ASTE study separately for the upstream process-simulation framework.

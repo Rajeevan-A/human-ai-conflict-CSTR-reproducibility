@@ -1,6 +1,7 @@
 {
-  "note": "SHA-256 hashes verified against four originally uploaded archives; GitHub Release asset filenames have number prefixes but bytes are identical. No third-party distribution rights implied.",
+  "note": "Exact public v1.0.0 release assets as checked 2026-11-24; fourth asset updated since initial v1.0.0 publication. For a permanent research record, freeze a new release tag rather than replacing historical assets. Listing does not imply third-party redistribution rights.",
   "repository": "https://github.com/Rajeevan-A/human-ai-conflict-CSTR-reproducibility",
+  "release_tag": "v1.0.0",
   "archives": {
     "aste": {
       "release_filename": "1.ASTE_Long_Context_Feasible.zip",
@@ -27,12 +28,12 @@
       "files": 28
     },
     "conflict": {
-      "release_filename": "4.HA_Conflict_Paper_Complete.zip",
-      "original_upload_name": "HA_Conflict_Paper_Complete(6).zip",
-      "root": "HA_Conflict_Paper_Complete",
-      "sha256": "db9c87460ab229c3fa8d634a278a1621615b02cb87d7cb208d1ad5c06c3dd2ae",
-      "size_bytes": 135202373,
-      "files": 206
+      "release_filename": "4.HA_Conflict_Model_and_All_Plots.zip",
+      "original_upload_name": "HA_Conflict_Updated_Model_and_All_Plots.zip",
+      "root": "HA_Conflict_Updated",
+      "sha256": "76e366088601edfa275bf4724300e062f2e8b6937694ac00a2c4378f0e03a40b",
+      "size_bytes": 191688058,
+      "files": 405
     }
   }
 }
